@@ -58,6 +58,9 @@ public class Predictor {
 
     /**
      * It builds a predictor with the given scheduling pattern and start time.
+     * 
+     * The time zone setting of the given DateTime will be used as the basis
+     * of the cron pattern.
      *
      * @param schedulingPattern The pattern on which the prediction will be
      * based.
@@ -67,12 +70,14 @@ public class Predictor {
      */
     public Predictor(String schedulingPattern, DateTime start)
             throws InvalidPatternException {
-        this.schedulingPattern = new SchedulingPattern(schedulingPattern);
-        this.dt = start;
+        this(new SchedulingPattern(schedulingPattern), start);
     }
     
     /**
      * It builds a predictor with the given scheduling pattern and start time.
+     * 
+     * The time zone setting of the given DateTime will be used as the basis
+     * of the cron pattern.
      *
      * @param schedulingPattern The pattern on which the prediction will be
      * based.
@@ -85,9 +90,9 @@ public class Predictor {
     }
 
     /**
-     * It returns the next matching moment as a {@link Date} object.
+     * It returns the next matching moment as a {@link DateTime} object.
      *
-     * @return The next matching moment as a {@link Date} object.
+     * @return The next matching moment as a {@link DateTime} object.
      */
     public synchronized DateTime nextMatchingDate() {
         do {
